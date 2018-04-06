@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   db
     .get()
     .then(actions => {
-      res.json(actions);
+      res.json(actions[0]);
     })
     .catch(error => {
       res.status(404).json({ error: 'Some error' });
