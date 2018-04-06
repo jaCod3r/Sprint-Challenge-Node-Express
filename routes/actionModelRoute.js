@@ -70,7 +70,7 @@ router.delete('/:id', (req, res) => {
   db
     .get(id)
     .then(response => {
-      user = { ...response[0] };
+      action = { ...response[0] };
       db
         .remove(id)
         .then(reponse => {
