@@ -7,38 +7,51 @@ const router = express.Router();
 router.get('/', (req, res) => {
   db
     .get()
-    .then(actions => {
-      res.json(actions[0]);
+    .then(projects => {
+      res.json(projects);
     })
     .catch(error => {
       res.status(404).json({ error: 'Error' });
     });
-});
+}); //Tested works
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db
-    .get()
-    .then(actions => {
-      res.json(actions[0]);
+    .get(id)
+    .then(project => {
+      res.json(project);
     })
     .catch(error => {
       res.status(404).json({ error: 'Error' });
     });
-});
+}); //Tested works
+
+router.get('/:id/actions', (req, res) => {
+  const { id } = req.params;
+
+  db
+    .getProjectActions(id)
+    .then(actions => {
+      res.json(actions);
+    })
+    .catch(error => {
+      res.status().json({ error: 'Error' });
+    });
+}); // Tested works
 
 router.post('/', (req, res) => {
   const project = req.body;
 
   db
     .insert(project)
-    .then(reponse => {
+    .then(response => {
       res.status(201).json(response);
     })
     .catch(error => {
-      error: 'Error';
+      res.status(500).json({ error: 'Error' });
     });
-});
+}); // Tested works
 
 router.put('/:id', (req, res) => {
   const { id } = req.params;
@@ -49,18 +62,14 @@ router.put('/:id', (req, res) => {
   db
     .update(id, update)
     .then(count => {
-      if (count > 0) {
-        db.get(id).then(updatedProject => {
-          res.status(200).json(updatedProject);
-        });
-      } else {
-        res.status(404).json(error);
-      }
+      db.get(id).then(updatedProject => {
+        res.status(200).json(updatedProject);
+      });
     })
     .catch(error => {
       res.status(500).json({ error: 'Error' });
     });
-});
+}); //Tested works
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
@@ -84,6 +93,6 @@ router.delete('/:id', (req, res) => {
         error: 'Error';
       });
     });
-});
+}); //Tested works
 
 module.exports = router;

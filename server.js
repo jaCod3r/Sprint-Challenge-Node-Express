@@ -10,8 +10,8 @@ server.use(morgan('dev'));
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api/actions', actionModelRoute);
-server.use('/api/projects', projectModelRoute);
+server.use('/api/actions/', actionModelRoute);
+server.use('/api/projects/', projectModelRoute);
 
 server.get('/', (req, res) => {
   res.send({ api: 'Running....' });
