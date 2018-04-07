@@ -6,8 +6,11 @@ const projectModelRoute = require('./routes/projectModelRoute');
 
 const server = express();
 
-server.use(morgan('dev'));
+const cors = require('cors');
+
 server.use(helmet());
+server.use(cors());
+server.use(morgan('dev'));
 server.use(express.json());
 
 server.use('/api/actions/', actionModelRoute);
