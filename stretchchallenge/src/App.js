@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -25,7 +25,14 @@ class App extends Component {
       <div className="App">
         <ul>
           {this.state.projects.map((project, index) => {
-            return <li key={index}>{project.name}</li>;
+            return (
+              <li key={index}>
+                <Link to={`/projects/${++index}/actions`}>{project.name}</Link>
+              </li>
+            );
+
+            //id of 1 => actions from id of 1 should be displayed
+            //match an id then go to its actions
           })}
         </ul>
       </div>

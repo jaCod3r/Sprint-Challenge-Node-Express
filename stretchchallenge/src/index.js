@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Actions from './Actions';
 
 ReactDOM.render(
   <Router>
-    <App />
+    <div>
+      <Route exact path="/" component={App} />
+      <Route exact path="/projects/:id/actions" component={Actions} />
+    </div>
   </Router>,
   document.getElementById('root')
 );
